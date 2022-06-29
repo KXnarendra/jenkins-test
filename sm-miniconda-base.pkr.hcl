@@ -1,28 +1,22 @@
-source "docker" "anaconda" {
-  image   = "ubuntu:20.04"
+source "docker" "alpine" {
+  image   = "alpine:3.14.0"
   commit  = true
   changes = [
-    "ENTRYPOINT /bin/bash",
-    "LABEL description='Smart Mobility Gramener Anaconda Base Image'"
+    "ENTRYPOINT /bin/sh"
   ]
 }
 
 build {
-  sources = ["source.docker.anaconda"]
-
-  provisioner "file" {
-    source      = "scripts/miniconda.sh"
-    destination = "/miniconda.sh"
-  }
+  sources = ["source.docker.alpine"]
 
   provisioner "shell" {
-    script = "scripts/miniconda-install.sh"
+    script = "scripts/alpine-install.sh"
   }
 
   post-processors {
     post-processor "docker-tag" {
-      repository = "448409259203.dkr.ecr.us-west-2.amazonaws.com/miniconda-base"
-      tags       = ["4.13.0"]
+      repository = "448409259203.dkr.ecr.us-west-2.amazonaws.com/alpine"
+      tags       = ["3.14.0-1"]
     }
 
     post-processor "docker-push" {
