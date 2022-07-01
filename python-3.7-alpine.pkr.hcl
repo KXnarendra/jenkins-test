@@ -3,7 +3,7 @@ source "docker" "python" {
   commit  = true
   changes = [
     "ENTRYPOINT /bin/sh",
-    "LABEL description='Smart Mobility Dashboard API base image'"
+    "LABEL description='Smart Mobility Dashboard APIIII base image'"
   ]
 }
 
